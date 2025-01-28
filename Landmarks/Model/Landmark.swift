@@ -15,7 +15,11 @@ struct Landmark: Hashable, Codable, Identifiable {
     var park: String
     var state: String
     var description: String
+    var isFavorite: Bool = false
     
+    enum CodingKeys: String, CodingKey {
+            case id, name, park, state, description, isFavorite, imageName,coordinates
+        }
     
     private var imageName: String
         var image: Image {
@@ -34,6 +38,19 @@ struct Landmark: Hashable, Codable, Identifiable {
         var latitude: Double
         var longitude: Double
     }
+    
+    init(from decoder: Decoder) throws {
+            let container = try decoder.container(keyedBy: CodingKeys.self)
+
+            id = try container.decode(Int.self, forKey: .id)
+            name = try container.decode(String.self, forKey: .name)
+            park = try container.decode(String.self, forKey: .park)
+            state = try container.decode(String.self, forKey: .state)
+            description = try container.decode(String.self, forKey: .description)
+            isFavorite = try container.decodeIfPresent(Bool.self, forKey: .isFavorite) ?? false // Установка значения по умолчанию
+            imageName = try container.decode(String.self, forKey: .imageName)
+            coordinates = try container.decode(Coordinates.self, forKey: .coordinates)
+        }
 }
 
 
