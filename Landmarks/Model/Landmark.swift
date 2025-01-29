@@ -47,7 +47,11 @@ struct Landmark: Hashable, Codable, Identifiable {
             park = try container.decode(String.self, forKey: .park)
             state = try container.decode(String.self, forKey: .state)
             description = try container.decode(String.self, forKey: .description)
+<<<<<<< HEAD
             isFavorite = try container.decodeIfPresent(Bool.self, forKey: .isFavorite) ?? false
+=======
+            isFavorite = try container.decodeIfPresent(Bool.self, forKey: .isFavorite) ?? false // Установка значения по умолчанию
+>>>>>>> origin/main
             imageName = try container.decode(String.self, forKey: .imageName)
             coordinates = try container.decode(Coordinates.self, forKey: .coordinates)
         }
