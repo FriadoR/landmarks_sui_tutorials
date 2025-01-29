@@ -1,1 +1,1 @@
-Apple tutorials with CoreLocation, @Observable, JSON, state & List app
+Apple tutorials with CoreLocation, @Observable, JSON, List app
