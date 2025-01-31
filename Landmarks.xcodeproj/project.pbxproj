@@ -16,6 +16,11 @@
 			path = Landmarks;
 			sourceTree = "<group>";
 		};
+		6F66F5C92D4D325D00A74CCE /* Badges */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Badges;
+			sourceTree = "<group>";
+		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -34,6 +39,7 @@
 			children = (
 				6F0459002D475876009C1FD0 /* Landmarks */,
 				6F0458FF2D475876009C1FD0 /* Products */,
+				6F66F5C92D4D325D00A74CCE /* Badges */,
 			);
 			sourceTree = "<group>";
 		};
@@ -62,6 +68,7 @@
 			);
 			fileSystemSynchronizedGroups = (
 				6F0459002D475876009C1FD0 /* Landmarks */,
+				6F66F5C92D4D325D00A74CCE /* Badges */,
 			);
 			name = Landmarks;
 			packageProductDependencies = (
