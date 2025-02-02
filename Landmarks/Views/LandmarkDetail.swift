@@ -15,7 +15,6 @@ struct LandmarkDetail: View {
         modelData.landmarks.firstIndex(where: { $0.id == landmark.id })!
     }
 
-    
     var body: some View {
         @Bindable var modelData = modelData
         
@@ -51,13 +50,13 @@ struct LandmarkDetail: View {
             .padding()
             Spacer()
         }
-                .navigationTitle(landmark.name)
-                .navigationBarTitleDisplayMode(.inline)
+        .navigationTitle(landmark.name)
+        .navigationBarTitleDisplayMode(.inline)
     }
 }
 
 #Preview {
     let modelData = ModelData()
-        return LandmarkDetail(landmark: modelData.landmarks[0])
-            .environment(modelData)
+    return LandmarkDetail(landmark: modelData.landmarks[0])
+        .environment(modelData)
 }
