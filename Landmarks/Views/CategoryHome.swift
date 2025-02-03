@@ -19,7 +19,7 @@ struct CategoryHome: View {
                     Text(key)
                 }
             }
-            .navigationTitle("Featured")
+            .navigationTitle("Избранное")
         } detail: {
             Text("Detail")
                 .navigationTitle("Category")
