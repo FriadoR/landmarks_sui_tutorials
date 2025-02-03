@@ -12,6 +12,10 @@ import Foundation
      var landmarks: [Landmark] = load("landmarkData.json")
      var hikes: [Hike] = load("hikeData.json")
      
+     var features: [Landmark] {
+         landmarks.filter { $0.isFeatured }
+     }
+     
      var categories: [String: [Landmark]] {
          Dictionary(
             grouping: landmarks,
@@ -36,11 +40,11 @@ func load<T: Decodable>(_ filename: String) -> T {
     
     do {
         let decoder = JSONDecoder()
-        // Добавим диагностику, чтобы увидеть, что не так
+        // whats wrong with u ?
         let decodedData = try decoder.decode(T.self, from: data)
         return decodedData
     } catch let decodingError {
-        // Печатаем детализированную ошибку
+        // print some error
         print("Error decoding \(filename): \(decodingError)")
         fatalError("Couldn't parse \(filename) as \(T.self):\n\(decodingError)")
     }

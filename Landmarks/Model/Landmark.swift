@@ -17,15 +17,16 @@ struct Landmark: Hashable, Codable, Identifiable {
     var description: String
     var isFavorite: Bool = false
     var category: Category
+    var isFeatured: Bool = false
     
     enum Category: String, CaseIterable, Codable {
-        case park = "park"
-        case castle = "castle"
-        case temple = "temple"
+        case park = "Парки"
+        case castle = "Дворцы"
+        case temple = "Храмы"
     }
     
     enum CodingKeys: String, CodingKey {
-        case id, name, location, state, description, isFavorite, imageName, coordinates, category
+        case id, name, location, state, description, isFavorite, imageName, coordinates, category, isFeatured
     }
     
     private var imageName: String
@@ -58,6 +59,7 @@ struct Landmark: Hashable, Codable, Identifiable {
         imageName = try container.decode(String.self, forKey: .imageName)
         coordinates = try container.decode(Coordinates.self, forKey: .coordinates)
         category = try container.decode(Landmark.Category.self, forKey: .category)
+        isFeatured = try container.decodeIfPresent(Bool.self, forKey: .isFeatured) ?? false
     }
 }
 
