@@ -12,14 +12,21 @@ import CoreLocation
 struct Landmark: Hashable, Codable, Identifiable {
     var id: Int
     var name: String
-    var park: String
+    var location: String
     var state: String
     var description: String
     var isFavorite: Bool = false
+    var category: Category
+    
+    enum Category: String, CaseIterable, Codable {
+        case park = "park"
+        case castle = "castle"
+        case temple = "temple"
+    }
     
     enum CodingKeys: String, CodingKey {
-            case id, name, park, state, description, isFavorite, imageName,coordinates
-        }
+        case id, name, location, state, description, isFavorite, imageName, coordinates, category
+    }
     
     private var imageName: String
         var image: Image {
@@ -40,18 +47,18 @@ struct Landmark: Hashable, Codable, Identifiable {
     }
     
     init(from decoder: Decoder) throws {
-            let container = try decoder.container(keyedBy: CodingKeys.self)
-
-            id = try container.decode(Int.self, forKey: .id)
-            name = try container.decode(String.self, forKey: .name)
-            park = try container.decode(String.self, forKey: .park)
-            state = try container.decode(String.self, forKey: .state)
-            description = try container.decode(String.self, forKey: .description)
-            isFavorite = try container.decodeIfPresent(Bool.self, forKey: .isFavorite) ?? false
-            isFavorite = try container.decodeIfPresent(Bool.self, forKey: .isFavorite) ?? false
-            imageName = try container.decode(String.self, forKey: .imageName)
-            coordinates = try container.decode(Coordinates.self, forKey: .coordinates)
-        }
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        
+        id = try container.decode(Int.self, forKey: .id)
+        name = try container.decode(String.self, forKey: .name)
+        location = try container.decode(String.self, forKey: .location)
+        state = try container.decode(String.self, forKey: .state)
+        description = try container.decode(String.self, forKey: .description)
+        isFavorite = try container.decodeIfPresent(Bool.self, forKey: .isFavorite) ?? false
+        imageName = try container.decode(String.self, forKey: .imageName)
+        coordinates = try container.decode(Coordinates.self, forKey: .coordinates)
+        category = try container.decode(Landmark.Category.self, forKey: .category)
+    }
 }
 
 
