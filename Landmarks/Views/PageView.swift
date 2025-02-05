@@ -12,6 +12,7 @@ struct PageView<Page: View>: View {
     
     var body: some View {
         PageViewController(pages: pages)
+            .aspectRatio(3 / 2, contentMode: .fit)
     }
 }
 
