@@ -8,28 +8,17 @@
 import SwiftUI
 
 struct CategoryHome: View {
-    
     @Environment(ModelData.self) var modelData
     @State private var showingProfile = false
     
     var body: some View {
-        
         NavigationSplitView {
             List {
-                // Check that the features array is not empty
-                if !modelData.features.isEmpty {
-                    modelData.features[0].image
-                        .resizable()
-                        .scaledToFill()
-                        .frame(height: 200)
-                        .clipped()
-                        .listRowInsets(EdgeInsets())
-                }
-                // Safely extracting elements from the categories dictionary
+                PageView(pages: modelData.features.map { FeatureCard(landmark: $0) })
+                    .listRowInsets(EdgeInsets())
+                
                 ForEach(modelData.categories.keys.sorted(), id: \.self) { key in
-                    if let items = modelData.categories[key] {
-                        CategoryRow(categoryName: key, items: items)
-                    }
+                    CategoryRow(categoryName: key, items: modelData.categories[key]!)
                 }
                 .listRowInsets(EdgeInsets())
             }
@@ -47,8 +36,7 @@ struct CategoryHome: View {
                     .environment(modelData)
             }
         } detail: {
-            Text("Detail")
-                .navigationTitle("Category")
+            Text("Select a Landmark")
         }
     }
 }
@@ -57,4 +45,3 @@ struct CategoryHome: View {
     CategoryHome()
         .environment(ModelData())
 }
-
