@@ -29,9 +29,17 @@ struct Landmark: Hashable, Codable, Identifiable {
         case id, name, location, state, description, isFavorite, imageName, coordinates, category, isFeatured
     }
     
-    private var imageName: String
-        var image: Image {
-            Image(imageName)
+    var imageName: String
+    var image: Image {
+        Image(imageName)
+    }
+    
+    var featureImage: Image? {
+        if isFeatured {
+                print("Looking for image: \(imageName)_feature")
+                return Image(imageName + "_feature")
+            }
+            return nil
         }
     
     private var coordinates: Coordinates

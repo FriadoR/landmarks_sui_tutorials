@@ -17,6 +17,14 @@ import Foundation
      var features: [Landmark] {
          landmarks.filter { $0.isFeatured }
      }
+//     no day for errors. fix print
+//     init() {
+//         landmarks = load("landmarkData.json")
+//
+//         for landmark in landmarks {
+//             print("Landmark: \(landmark.name), imageName: \(landmark.imageName), isFeatured: \(landmark.isFeatured)")
+//         }
+//     }
      
      var categories: [String: [Landmark]] {
          Dictionary(
