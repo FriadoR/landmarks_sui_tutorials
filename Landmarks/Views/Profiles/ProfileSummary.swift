@@ -9,6 +9,8 @@ import SwiftUI
 
 struct ProfileSummary: View {
     
+    @AppStorage("isDarkMode") private var isDarkMode = false
+    @EnvironmentObject var ThemeManager: ThemeManager
     @Environment(ModelData.self) var modelData
     var profile: Profile
     
@@ -19,22 +21,30 @@ struct ProfileSummary: View {
                     .bold()
                     .font(.title)
                 
-                Text("Notifications: \(profile.prefersNotifications ? "On": "Off" )")
-                Text("Seasonal Photos: \(profile.seasonalPhoto.rawValue)")
-                Text("Goal Date: ") + Text(profile.goalDate, style: .date)
+                Text("Уведомления: \(profile.prefersNotifications ? "On": "Off" )")
+                Text("Сезонный стикер: \(profile.seasonalPhoto.rawValue)")
+                Text("Дата посещения: ") + Text(profile.goalDate, style: .date)
+                Toggle("Использовать тёмную тему", isOn: $ThemeManager.isDarkMode)
+                    .onChange(of: ThemeManager.isDarkMode) { newValue in
+                            withAnimation {
+                                UIApplication.shared.windows.first?.rootViewController?.view.overrideUserInterfaceStyle = ThemeManager.isDarkMode ? .dark : .light
+                        }
+                    }
+                    .background(Color(.systemBackground)) // Меняет цвет в зависимости от темы
+                    
                 
                 Divider()
                 
                 VStack(alignment: .leading) {
-                    Text("Completed Badges")
+                    Text("Полученные достижения")
                         .font(.headline)
                     
                     ScrollView(.horizontal) {
                         HStack {
-                            HikeBadge(name: "First Hike")
-                            HikeBadge(name: "Earth Day")
+                            HikeBadge(name: "Первый поход")
+                            HikeBadge(name: "День Земли")
                                 .hueRotation(Angle(degrees: 90))
-                            HikeBadge(name: "Tenth Hike")
+                            HikeBadge(name: "Десятый Поход")
                                 .grayscale(0.5)
                                 .hueRotation(Angle(degrees: 45))
                         }
@@ -44,7 +54,7 @@ struct ProfileSummary: View {
                 Divider()
                 
                 VStack(alignment: .leading) {
-                    Text("Recent Hikes")
+                    Text("Недавний поход")
                         .font(.headline)
                     
                     HikeView(hike: modelData.hikes[0])
