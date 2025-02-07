@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ProfileSummary: View {
     
-//    @AppStorage("isDarkMode") private var isDarkMode = false
+    @AppStorage("isDarkMode") private var isDarkMode = false
     @EnvironmentObject var themeManager: ThemeManager
     @Environment(ModelData.self) var modelData
     var profile: Profile
@@ -31,7 +31,7 @@ struct ProfileSummary: View {
                         .onChange(of: themeManager.isDarkMode) { newValue in
                             themeManager.updateUITheme() // update interface
                         }
-                    Spacer() // Отступ слева от текста, чтобы он не сдвигался
+                    Spacer()
                 }
                 
                 Divider()

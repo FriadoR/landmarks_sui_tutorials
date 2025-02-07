@@ -44,4 +44,5 @@ struct ProfileHost: View {
 #Preview {
     ProfileHost()
         .environment(ModelData())
+        .environmentObject(ThemeManager())
 }
