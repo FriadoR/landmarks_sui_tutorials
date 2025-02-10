@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     
+    @EnvironmentObject var themeManager: ThemeManager
     @State private var selection: Tab = .featured
     
     enum Tab {
@@ -31,10 +32,15 @@ struct ContentView: View {
                 }
                 .tag(Tab.list)
         }
+        .navigationBarItems(trailing: Toggle(isOn: $themeManager.isDarkMode) {
+            Text("Тема")
+        })
+        .preferredColorScheme(themeManager.isDarkMode ? .dark : .light)
     }
 }
 
 #Preview {
     ContentView()
         .environment(ModelData())
+        .environmentObject(ThemeManager())
 }
