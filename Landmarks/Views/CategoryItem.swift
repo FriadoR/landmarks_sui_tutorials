@@ -21,6 +21,15 @@ struct CategoryItem: View {
                 .font(.caption)
         }
         .padding(.leading, 15)
+        .aspectRatio(3 / 2, contentMode: .fit)
+        .clipShape(.rect(cornerRadius: 15))
+        .contentShape(.rect)
+        .scrollTransition { content, phase in content
+                .opacity(phase.isIdentity ? 1 : 0.9)
+                .scaleEffect(phase.isIdentity ? 1 : 0.9)
+                .blur(radius: phase.isIdentity ? 0 : 1)
+                .rotationEffect(.degrees(phase.value * 5))
+        }
     }
 }
 
